@@ -47,7 +47,7 @@ export default class StationUse extends Component {
                 Authorization: `Bearer ${localStorage.getItem('result')}`,
             },
         }
-        const api = 'http://localhost:3100/private/station/getStations'
+        const api = 'http://localhost:3100/private/station/getStation'
         axios
             .get(api, config)
             .then(function (res) {
@@ -61,21 +61,20 @@ export default class StationUse extends Component {
                     open_houer_weekend,
                     landmark,
                     chargers,
-                    parking_lots,
                 } = res.data.result
                 const array = []
-                for (let index = 0; index < parking_lots.length; index++) {
-                    chargers.forEach((item) => {
+                chargers.forEach((item) => {
+                    item.connector_status.forEach((_, index) => {
                         array.push({
                             id: item._id,
                             numbercherger: `${item.charger_no} : ${item.charger_models}`,
-                            parking: parking_lots[index].id,
+                            parking: index + 1,
                             caretaker: 'นายเสาไฟฟ้า แรงสูง',
-                            // headCharger:
+                            headCharger: item.connector_status,
                         })
                     })
-                }
-                const newArr = uniqBy(array, 'charger_no')
+                })
+                const newArr = uniqBy(array, 'numbercherger')
                 currentComponent.setState({
                     address: address,
                     lat: coordinate.lattitude,
@@ -88,6 +87,7 @@ export default class StationUse extends Component {
                     charger: array,
                     totalCharger: newArr.length,
                 })
+                console.log('charger', currentComponent.state.charger)
             })
             .catch((err) => {
                 alert('Error!!')
@@ -429,7 +429,53 @@ export default class StationUse extends Component {
 
                                                                 <div className="pc-col-md-12">
                                                                     <ul>
-                                                                        <li>
+                                                                        {this.state.charger.map(
+                                                                            (
+                                                                                item,
+                                                                                index
+                                                                            ) => (
+                                                                                <li
+                                                                                    key={
+                                                                                        index
+                                                                                    }
+                                                                                >
+                                                                                    <div className="pc-row">
+                                                                                        <div className="pc-col-md-12">
+                                                                                            <div className="pc-adapter--no">
+                                                                                                {
+                                                                                                    item
+                                                                                                        .connector_status
+                                                                                                        .length
+                                                                                                }
+                                                                                            </div>
+                                                                                            <div className="pc-adapter--status status-inactive">
+                                                                                                <i className="pc-ic_charge-inactive"></i>
+                                                                                            </div>
+                                                                                            <div className="pc-adapter--ico">
+                                                                                                <i className="pc-ic_adapter1"></i>
+                                                                                            </div>
+                                                                                            <div className="pc-adapter--slot">
+                                                                                                ว่าง
+                                                                                                {
+                                                                                                    (item.connector_status.reduce(
+                                                                                                        (
+                                                                                                            sum,
+                                                                                                            result
+                                                                                                        ) =>
+                                                                                                            result.current_status ===
+                                                                                                                'Available' &&
+                                                                                                            sum +
+                                                                                                                1
+                                                                                                    ),
+                                                                                                    0)
+                                                                                                }
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+                                                                            )
+                                                                        )}
+                                                                        {/* <li>
                                                                             <div className="pc-row">
                                                                                 <div className="pc-col-md-12">
                                                                                     <div className="pc-adapter--no">
@@ -447,8 +493,8 @@ export default class StationUse extends Component {
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </li>
-                                                                        <li>
+                                                                        </li> */}
+                                                                        {/* <li>
                                                                             <div className="pc-row">
                                                                                 <div className="pc-col-md-12">
                                                                                     <div className="pc-adapter--no">
@@ -562,8 +608,8 @@ export default class StationUse extends Component {
                                                                                 </div>
                                                                             </div>
                                                                         </li>
-                                                                        <li>
-                                                                            <div className="pc-row">
+                                                                        <li> */}
+                                                                        {/* <div className="pc-row">
                                                                                 <div className="pc-col-md-12">
                                                                                     <div className="pc-adapter--no">
                                                                                         3
@@ -580,7 +626,7 @@ export default class StationUse extends Component {
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </li>
+                                                                        </li> */}
                                                                     </ul>
                                                                 </div>
                                                             </div>
