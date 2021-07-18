@@ -1,0 +1,176 @@
+.pc-tabs--link {
+  box-shadow: 0 0 40px 40px rgb(22, 65, 147) inset, 0 0 0 0 #3498db;
+  transition: all 150ms ease-in-out;
+}
+
+.isactvie li {
+  background-color: #3498db;
+}
+
+.im-car {
+  width: 100%;
+  background-color: #fff0aa;
+}
+.im-cari{
+  border: 1px solid #000;
+  width: 50%;
+}
+.im-car img {
+
+  width: 100%;
+}
+/* .pc-field {
+  position: relative;
+} */
+.pc-sel {
+  position: relative;
+  display: flex;
+}
+/* .pc-sel select {
+  display: none;
+} */
+
+.pc-sel select{
+  border: 1px solid rgb(45, 128, 191);
+  width: 200px;
+  height: 50px;
+  font-family: 'ThaiSansNeue-SemiBold';
+  color: rgb(45, 128, 191);
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.cc {
+  width: 10px;
+
+}
+.pc-row img {
+  width: 50px;
+}
+.pc-ic_analyze-problem img {
+  padding: 5px 0;
+}
+
+.pc-field--search .pc-groupin input { height: 36px; width: 100%; padding: 0 18px; padding-right: 60px; font-size: 18px; font-family: 'ThaiSansNeue-SemiBold'; border-radius: 7px; border: 2px solid #2D80BF; color: #2D80BF; }
+.pc-field--search .pc-groupin input::-webkit-input-placeholder { color: #2D80BF; }
+.pc-field--search .pc-groupin input::-moz-placeholder { color: #2D80BF; }
+.pc-field--search .pc-groupin input:-ms-input-placeholder { color: #2D80BF; }
+.pc-field--search .pc-groupin input:-moz-placeholder { color: #2D80BF; }
+.pc-field--search .pc-groupin button { width: 60px; height: 36px; position: absolute; right: 0; top: 0; background-color: #2D80BF; color: #FFFFFF; text-align: center; font-size: 24px; border-radius: 0; border-top-right-radius: 6px; border-bottom-right-radius: 6px; }
+.pc-groupin img {width: 17px;}
+.pc-field--search1 .pc-g {width: 47%;}
+.pc-field--search1 .pc-groupin input { height: 36px; width: 100%; padding: 0 18px; padding-right: 60px; font-size: 18px; font-family: 'ThaiSansNeue-SemiBold'; border-radius: 7px; border: 2px solid #2D80BF; color: #2D80BF; }
+.pc-field--search1 .pc-groupin input::-webkit-input-placeholder { color: #2D80BF; }
+.pc-field--search1 .pc-groupin input::-moz-placeholder { color: #2D80BF; }
+.pc-field--search1 .pc-groupin input:-ms-input-placeholder { color: #2D80BF; }
+.pc-field--search1 .pc-groupin input:-moz-placeholder { color: #2D80BF; }
+.pc-field--search1 .pc-groupin button { width: 60px; height: 36px; position: absolute; right: 0; top: 0; background-color: #2D80BF; color: #FFFFFF; text-align: center; font-size: 24px; border-radius: 0; border-top-right-radius: 6px; border-bottom-right-radius: 6px; }
+.pc-field--search1 .pc-groupin button {
+  width: 60px;
+  height: 36px;
+  position: absolute;
+  right: 200px;
+  top: 0;
+  background-color: #2D80BF;
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+  border-radius: 0;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.pc-img-round1  {
+  border: 3px solid #2D80BF;
+  display: block;
+  margin: 0 auto;
+  min-width: 54px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+.dr {
+  height: 25px;
+}
+
+.txt-navv {
+  text-align: center;
+  margin-top: 10px;
+  color: rgb(22, 65, 148);
+}
+.pc-row-charger {
+  width: 50%;
+  border:  1px solid #000;
+  height: 142px;
+}
+.pc-row-charger img {
+  width: 100px;
+}
+.im-charger img {
+  width: 165px;
+}
+.pc-col-md-11 {
+  width: 400%;
+}
+.pc-row-chargering {
+  display: flex;
+  width: auto;
+  background-color: rgb(253, 240, 170);
+}
+.imcar {
+  width: 20%;
+  background-color: #fff;
+
+}
+.im-car img {
+  width: 20%;
+  height: auto;
+  background-color: #fff;
+}
+.pc-overallstat--summary1 { width: 185px; position: absolute; right: 0; top: 0; }
+
+.pc-overallstat--summary1 li{
+  background-color: #ffffff80;
+    height: 74px;
+    margin-bottom: 8px;
+    font-size: 34px;
+    padding: 7px 7px;
+    color: #fff;
+}
+/* .btn-sinin input {
+  width: 60px;
+  height: 32px;
+} */
+
+.logo-egat  img {
+  width: 50px;
+}
+.logout {
+  margin-top: 13px;
+}
+.pc-navbar--gridwhiz ul {
+  display: -webkit-box;
+  margin-left: -100px;
+}
+
+
+
+@media (max-width: 1024px) { 
+  .pc-footer--img{
+    height: 0px;
+  } 
+  .pc-footer--content {
+    display: inline-flex;
+    width: 100%;
+  }
+  .pc-footer--top_img{
+    /* margin-left: 16%; */
+    height: 219px;
+    width: calc(71% + 236px);
+  
+  }
+}
+.batterry table {
+  background-color: #fdf0aa;
+}
