@@ -4,7 +4,7 @@ import Nav from '../Nav/Nav'
 import Footer from '../Footer/Footer'
 import Mapgoogle from '../map/Mapgoogle'
 import axios from 'axios'
-import { uniqBy } from 'lodash'
+import { uniqBy, filter } from 'lodash'
 
 export default class StationUse extends Component {
     constructor(props) {
@@ -24,6 +24,7 @@ export default class StationUse extends Component {
                     caretaker: 'นายเสาไฟฟ้า แรงสูง',
                 },
             ],
+            headChargers: [],
             totalCharger: 0,
             address:
                 '24 หมู่ 13 ถนนสุวินทวงศ์ แขวงแสนเสบ เขตมีนบุรี กทม. 10510',
@@ -35,12 +36,15 @@ export default class StationUse extends Component {
             weekend: '24 hours.',
             caretaker: 'นายกมล ดวงใจ',
             contact: '02-4456792 ต่อ 213',
+            contactSocial: {
+                facebook: 'www.facebook.com',
+            },
         }
 
         this.getData = this.getData.bind(this)
     }
 
-    getData() {
+    async getData() {
         let currentComponent = this
         const config = {
             headers: {
@@ -48,7 +52,7 @@ export default class StationUse extends Component {
             },
         }
         const api = 'http://localhost:3100/private/station/getStation'
-        axios
+        await axios
             .get(api, config)
             .then(function (res) {
                 console.log(res.data.result)
@@ -64,13 +68,12 @@ export default class StationUse extends Component {
                 } = res.data.result
                 const array = []
                 chargers.forEach((item) => {
-                    item.connector_status.forEach((_, index) => {
+                    item.connector_status.forEach((items, index) => {
                         array.push({
                             id: item._id,
                             numbercherger: `${item.charger_no} : ${item.charger_models}`,
                             parking: index + 1,
                             caretaker: 'นายเสาไฟฟ้า แรงสูง',
-                            headCharger: item.connector_status,
                         })
                     })
                 })
@@ -86,8 +89,16 @@ export default class StationUse extends Component {
                     contact: contact_tel,
                     charger: array,
                     totalCharger: newArr.length,
+                    headChargers: chargers,
+                    contactSocial: {
+                        facebook: res.data.result.contact.facebook,
+                    },
                 })
-                console.log('charger', currentComponent.state.charger)
+                console.log(
+                    'contactSocial',
+                    currentComponent.state.contactSocial,
+                    res.data.result.contact.facebook
+                )
             })
             .catch((err) => {
                 alert('Error!!')
@@ -314,7 +325,11 @@ export default class StationUse extends Component {
                                                                     <i className="pc-ic_o-mail"></i>
                                                                 </li>
                                                                 <li>
-                                                                    <i className="pc-ic_o-fb"></i>
+                                                                    <a
+                                                                        href={`https://${this.contactSocial.facebook}`}
+                                                                    >
+                                                                        <i className="pc-ic_o-fb"></i>
+                                                                    </a>
                                                                 </li>
                                                                 <li className="is-inactive">
                                                                     <i className="pc-ic_o-ig"></i>
@@ -429,7 +444,7 @@ export default class StationUse extends Component {
 
                                                                 <div className="pc-col-md-12">
                                                                     <ul>
-                                                                        {this.state.charger.map(
+                                                                        {this.state.headChargers.map(
                                                                             (
                                                                                 item,
                                                                                 index
@@ -457,17 +472,15 @@ export default class StationUse extends Component {
                                                                                             <div className="pc-adapter--slot">
                                                                                                 ว่าง
                                                                                                 {
-                                                                                                    (item.connector_status.reduce(
+                                                                                                    filter(
+                                                                                                        item.connector_status,
                                                                                                         (
-                                                                                                            sum,
-                                                                                                            result
+                                                                                                            el
                                                                                                         ) =>
-                                                                                                            result.current_status ===
-                                                                                                                'Available' &&
-                                                                                                            sum +
-                                                                                                                1
-                                                                                                    ),
-                                                                                                    0)
+                                                                                                            el.current_status ===
+                                                                                                            'Available'
+                                                                                                    )
+                                                                                                        .length
                                                                                                 }
                                                                                             </div>
                                                                                         </div>
