@@ -36,9 +36,9 @@ export default class StationUse extends Component {
             weekend: '24 hours.',
             caretaker: 'นายกมล ดวงใจ',
             contact: '02-4456792 ต่อ 213',
-            contactSocial: {
-                facebook: 'www.facebook.com',
-            },
+            contactSocial: {},
+            name: '',
+            network: '',
         }
 
         this.getData = this.getData.bind(this)
@@ -65,6 +65,8 @@ export default class StationUse extends Component {
                     open_houer_weekend,
                     landmark,
                     chargers,
+                    name_en,
+                    network,
                 } = res.data.result
                 const array = []
                 chargers.forEach((item) => {
@@ -93,12 +95,10 @@ export default class StationUse extends Component {
                     contactSocial: {
                         facebook: res.data.result.contact.facebook,
                     },
+                    name: name_en,
+                    network,
                 })
-                console.log(
-                    'contactSocial',
-                    currentComponent.state.contactSocial,
-                    res.data.result.contact.facebook
-                )
+                console.log(currentComponent.state.station.name_en)
             })
             .catch((err) => {
                 alert('Error!!')
@@ -223,10 +223,11 @@ export default class StationUse extends Component {
                                                 alt=""
                                             />
                                             <h2 className="pc-station--name">
-                                                EGAT Station ท103
+                                                {this.state.name}
                                             </h2>
                                             <p className="pc-station--info">
-                                                เครื่อข่าย : การไฟฟ้าส่วนภูมิภาค
+                                                เครื่อข่าย :{' '}
+                                                {this.state.network}
                                             </p>
                                         </div>
                                     </div>
@@ -326,7 +327,8 @@ export default class StationUse extends Component {
                                                                 </li>
                                                                 <li>
                                                                     <a
-                                                                        href={`https://${this.contactSocial.facebook}`}
+                                                                        href={`https://${this.state.contactSocial.facebook}`}
+                                                                        target="_blank"
                                                                     >
                                                                         <i className="pc-ic_o-fb"></i>
                                                                     </a>
